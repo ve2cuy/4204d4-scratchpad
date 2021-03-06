@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  srv01:
+    image: alpine
+    container_name: serveur01 # Optionnel
+ 
+  srv02:
+    image: alpine
+    container_name: serveur02 # Optionnel
+ 
+  srv03:
+    image: alpine
+    container_name: serveur03  # Optionnel

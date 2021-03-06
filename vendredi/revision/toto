@@ -1,0 +1,14 @@
+# Ceci est un exercice de révision
+# Révision mercredi
+# docker build ... 
+FROM httpd
+COPY yo.html /usr/local/apache2/htdocs/index.html
+RUN mv 4204d4/module01/semaine02/exercice03/* /usr/local/apache2/htdocs/
+
+RUN mkdir /projet01
+RUN touch /projet01/lisez-moi.MD
+RUN git clone ...
+RUN apt update
+RUN apt install git htop -y
+RUN cd /projet01
+# RUN git clone http://github.com/...

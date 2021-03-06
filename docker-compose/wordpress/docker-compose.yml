@@ -1,0 +1,28 @@
+version: '3.3'
+
+services:
+   baseDeDonneesPourWP:
+     image: mysql:5.7
+     volumes:
+       - db_data:/var/lib/mysql
+     restart: always
+     environment:
+       MYSQL_ROOT_PASSWORD: jteledispas
+       MYSQL_DATABASE: wordpress          # Ne pas modifier
+       MYSQL_USER: wordpress              
+       MYSQL_PASSWORD: wordpress
+
+   wordpress:
+     # depends_on:
+     #  - baseDeDonneesPourWP
+     image: wordpress:latest
+     ports:
+       - "8000:80"
+     restart: always  # À expliquer!
+     environment:
+       WORDPRESS_DB_HOST: baseDeDonneesPourWP  # Même réseau par défaut - alors, DNS dispo.
+       WORDPRESS_DB_USER: wordpress
+       WORDPRESS_DB_PASSWORD: wordpress
+       WORDPRESS_DB_NAME: wordpress
+volumes:
+    db_data:

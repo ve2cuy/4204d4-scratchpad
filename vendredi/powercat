@@ -1,0 +1,14 @@
+# docker build -f powercat .
+FROM httpd:2.4
+LABEL moi <ici@me.com>
+RUN mkdir /420
+RUN cd /420
+run apt update
+run apt install git htop mcedit curl mc -y
+run git clone https://github.com/ve2cuy/4204d4.git
+run mv 4204d4/module01/semaine02/exercice03/* /usr/local/apache2/htdocs
+run sed -i 's/Alain Boudreault/Bob Binette/g' /usr/local/apache2/htdocs/index.html
+COPY tube-chat-png.png /usr/local/apache2/htdocs/docker-logo.jpg
+COPY powercat /usr/local/apache2/htdocs/info.txt
+run addgroup gestion
+run useradd -p unmodepasse -G gestion,sudo gestionweb

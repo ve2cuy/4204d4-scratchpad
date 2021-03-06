@@ -1,0 +1,11 @@
+# Projet révision Dockerfile
+# Auteur:
+FROM nginx
+LABEL Alain Boudreault <aboudrea@cstj.qc.ca>
+RUN apt update
+RUN apt install mcedit -y
+RUN apt install htop -y
+RUN mkdir /projet-abc
+RUN touch /projet-abc/readme.MD
+RUN useradd gestion
+COPY index.html /usr/share/nginx/html/

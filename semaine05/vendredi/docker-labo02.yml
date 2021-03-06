@@ -1,0 +1,30 @@
+version: "3.9"
+services:
+  cie_db:
+    image: mariadb:10.5
+    environment:
+        MYSQL_ROOT_PASSWORD: donttell
+        MYSQL_DATABASE: cie_abc
+        MYSQL_USER: cieuser
+        MYSQL_PASSWORD: ciepassword
+    volumes:
+      - ./cie_data2:/var/lib/mysql
+
+  wordpress:
+    image: wordpress:5.6.2
+    ports:
+      - "80:80"
+    environment:
+     WORDPRESS_DB_HOST: cie_db
+     WORDPRESS_DB_USER: cieuser
+     WORDPRESS_DB_PASSWORD: ciepassword
+     WORDPRESS_DB_NAME: cie_abc
+
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - "8080:80"
+    environment:
+      - "PMA_HOST=cie_db"
+      - "PMA_USER=root"
+      - "PMA_PASSWORD=donttell"

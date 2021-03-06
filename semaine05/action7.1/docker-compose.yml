@@ -1,0 +1,48 @@
+# ###########################################################################
+# Fichier:      docker-compose.yml
+# Auteur:       Alain Boudreault
+# Date:         2021.03.05
+# Description:  Exemple d'un docker-compose avec un build intégré.
+# ###########################################################################
+version: '3.3'
+# docker-compose build
+# docker-compose up --build -d
+# OU
+# docker-compose up -d
+
+services:
+  # Note: pas de caractères majuscules dans le nom du service
+  mondebian:
+   image: alainboudreault/serveur01  
+   container_name: serveur01
+   build: .
+   restart: always
+   stdin_open: true # docker run -i
+   tty: true        # docker run -t
+   environment:
+     - VERSION=action7.1
+   networks: 
+     - reseau7.1          
+  
+  serveur02:
+    image: alainboudreault/serveur01
+    container_name: serveur02
+    stdin_open: true
+    tty: true       
+    networks: 
+     - reseau7.1            
+
+  web:
+   image: nginx:latest
+   ports:
+     - "8000:80"
+   restart: always
+   volumes:
+     - ./web:/usr/share/nginx/html/perso
+   networks: 
+     - reseau7.1      
+
+networks:
+  reseau7.1:
+    name: jeSuisLeReseau7.1
+    driver: bridge

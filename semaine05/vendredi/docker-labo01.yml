@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  maBD:
+    image: mysql
+    environment:
+        - "MYSQL_ROOT_PASSWORD=password"
+    # Liaison du dossier des BD : 
+    volumes:
+      - ./mesBD:/var/lib/mysql
+
+  appWordpress:
+    image: phpmyadmin
+    ports:
+      - "88:80"
+    # Les variables nécessaires au fonctionnement de WP
+    environment:
+      - "PMA_HOST=maBD"
+      - "PMA_USER=root"
+      - "PMA_PASSWORD=password"
+

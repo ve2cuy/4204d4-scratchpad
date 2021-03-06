@@ -1,0 +1,13 @@
+# Ceci est une commentaire
+FROM ubuntu
+
+LABEL Alain Boudreault <moi@me.com>
+
+RUN apt-get update
+RUN apt-get install nano -y
+
+COPY hello.sh /
+RUN chmod a+x /hello.sh
+
+CMD ["/hello.sh"]
+

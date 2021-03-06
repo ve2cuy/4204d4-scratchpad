@@ -1,0 +1,20 @@
+# Fichier: docker-comp-init-bd.yml
+# Auteur: Alain Boudreault
+# Date: 2021.02.18
+# --------------------------------
+# Exemple de modification du schéma de la DB lors de l'étape démarrage du service.
+# De plus, les BD sont liées à l'extérieur du conteneur.
+# Les répertoires: database et dbdata doivent exister dans le dossier courrant.
+# Le fichier d'initialisation SQL 'mabd-init.sql' doit-être présent dans le dossier database.
+
+version: '3'
+services:
+  mysql:
+    image: mysql:5.7
+    volumes:
+       - ./database:/tmp/database
+       - ./dbdata:/var/lib/mysql:rw
+    ports:
+      - "3308:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=password

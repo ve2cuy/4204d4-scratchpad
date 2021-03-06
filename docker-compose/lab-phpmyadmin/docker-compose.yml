@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+  laBD:
+    image: mysql:5.7
+    container_name: maBD
+    environment:
+      - MYSQL_ROOT_PASSWORD=memesitumepetteslafacejtelediraipas
+    volumes:
+      - ./dbdata:/var/lib/mysql:rw
+  myadmin:
+    image: phpmyadmin
+    container_name: myadmin
+    ports:
+      - "88:80"
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_USER=root
+      - PMA_PASSWORD=memesitumepetteslafacejtelediraipas
+      - PMA_HOST=maBD
+
+# Définition des volumes - Nécessaire pour les utilisations ci-haut.
+volumes:
+  dbdata:
+#    external: 
+#      name: dbdata

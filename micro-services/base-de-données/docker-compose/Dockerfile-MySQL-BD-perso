@@ -1,0 +1,8 @@
+# Fichier: Dockerfile-MySQL-BD-perso
+# Exemple d'une image MySQL avec une BD personnalisée.
+
+FROM mysql:5.7
+ENV MYSQL_ROOT_PASSWORD="password"
+COPY ./database/mabd-init.sql /tmp/mabd-init.sql
+# RUN mysqld --user=root --init-file="/tmp/mabd-init.sql"
+

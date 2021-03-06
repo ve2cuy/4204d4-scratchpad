@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  srv01:
+    image: alpine
+    container_name: serveur01
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    networks: 
+      - reseauAlpine
+    environment:
+      - JESUIS=Le spécialiste de la paresse
+#    command: sh      
+  srv02:
+    image: alpine
+    container_name: serveur02
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    networks: 
+      - reseauAlpine    
+    environment:
+      - JESUIS=Celui qui fait du sur place
+#    command: top      
+
+networks:
+  reseauAlpine:
+    name: jeSuisLeRreseauAlpine
+    driver: bridge

@@ -1,0 +1,37 @@
+# Fichier:     docker-compose.yml
+# Auteur:      Alain Boudreault
+# Date:        2021.02.13 
+# Description: Mise en place d'un système de 3 alpine
+ 
+version: "3.9"
+services:
+  srv01:
+    image: alpine:latest
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    container_name: serveur01 # Optionnel
+    networks: 
+      - reseauAlpine 
+    environment:
+      - JESUIS=Celui qui fait du sur place             
+ 
+  srv02:
+    image: alpine
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    container_name: serveur02 # Optionnel
+    networks: 
+      - reseauAlpine    
+
+  srv03:
+    image: alpine
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    container_name: serveur03  # Optionnel
+    networks: 
+      - reseauAlpine    
+
+networks:
+  reseauAlpine:
+    name: jeSuisLeReseauAlpine
+    driver: bridge    

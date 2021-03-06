@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: je-suis-un-conteneur-nginx
+  name: mon-nom-est-conteneur-nginx
+
+spec:
+  selector:
+    matchLabels:
+      app: mon-conteneur-nginx
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: mon-conteneur-nginx
+    spec:
+      # hostNetwork: true
+      containers:
+      - name: mon-conteneur-nginx
+        image: nginx
+        ports:
+        - containerPort: 80  # Doit correspondre au port exposé du conteneur.
+          # hostPort: 80
+
+# Ici commence un autre document yaml -> ---
+# Il est de pratique courante de fusionner les directives de l'application et de ses services.
+# Par contre, il est aussi possible de renseigner deux fichiers.
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mon-service-nginx
+spec:
+  
+  selector:
+    app: mon-conteneur-nginx
+  type: LoadBalancer                 # NodePort  # Nécessaire pour exposer un port IP du conteneur. Par défaut, le type est 'ClusterIP'
+  ports:
+    - protocol: TCP
+      port: 80  # Est le port exposé
+      targetPort: 80   # Doit correspondre au 'containerPort:'
+      nodePort: 30000  # Est le port qui sera exposé vers le monde extérieur.  Ports valides : 30000-32767. Si non spécifié, k8s va attribuer un port.
